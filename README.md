@@ -1,1 +1,1 @@
-# panic-monger-indentifier
+# fearmongering-detection-system
