@@ -1,3 +1,9 @@
+# Gitignore file
+*.gitignore
+
+# IntelliJ Idea file
+*.iml
+
 # Compiled class file
 *.class
 
