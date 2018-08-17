@@ -9,7 +9,7 @@ import twitter4j.Status;
 
 import java.util.Map;
 
-public class IdentifyPanicTweetBolt extends BaseRichBolt
+public class FilterPanicTweetsBolt extends BaseRichBolt
 {
     private OutputCollector collector;
 

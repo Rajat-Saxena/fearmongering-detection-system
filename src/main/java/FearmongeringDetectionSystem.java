@@ -12,13 +12,11 @@ public class FearmongeringDetectionSystem
 
         builder.setSpout(Constants.twitterStreamSpoutId, new TwitterStreamSpout(), 5);
 
-        builder.setBolt(Constants.identifyPanicTweetBoltId, new IdentifyPanicTweetBolt(), 8)
+        builder.setBolt(Constants.filterPanicTweetBoltId, new FilterPanicTweetsBolt(), 8)
                 .shuffleGrouping(Constants.twitterStreamSpoutId);
 
-        builder.setSpout(Constants.twitterReliableNewsSpoutId, new TwitterReliableNewsSpout(), 5);
-
         builder.setBolt(Constants.filterReliableTweetsBoltId, new FilterReliableTweetsBolt(), 8)
-                .fieldsGrouping(Constants.twitterReliableNewsSpoutId, new Fields(""));
+                .fieldsGrouping(Constants.twitterStreamSpoutId, new Fields(""));
 
         Config conf = new Config();
         conf.setDebug(false);
