@@ -26,7 +26,7 @@ public class TwitterReliableNewsSpout extends BaseRichSpout
         StatusListener listener = new StatusListener() {
             @Override
             public void onStatus(Status status) {
-                if (reliableList.contains(status.getUser().getScreenName()))
+                //if (reliableList.contains(status.getUser().getScreenName()))
                     queue.offer(status);
             }
 
