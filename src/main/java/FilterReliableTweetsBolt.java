@@ -24,8 +24,8 @@ public class FilterReliableTweetsBolt extends BaseRichBolt
     {
         Status tweet = (Status) tuple.getValueByField("tweet");
 
-        // if verified tweet
-        collector.emit(new Values(tweet));
+        if (tweet.getUser().isVerified())
+            collector.emit(new Values(tweet));
     }
 
     @Override
