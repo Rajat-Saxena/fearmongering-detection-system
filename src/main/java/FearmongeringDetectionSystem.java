@@ -1,8 +1,8 @@
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.tuple.Fields;
 import utils.Constants;
+import utils.GetPanicWords;
 
 public class FearmongeringDetectionSystem
 {
@@ -16,7 +16,10 @@ public class FearmongeringDetectionSystem
                 .shuffleGrouping(Constants.twitterStreamSpoutId);
 
         builder.setBolt(Constants.filterReliableTweetsBoltId, new FilterReliableTweetsBolt(), 8)
-                .fieldsGrouping(Constants.twitterStreamSpoutId, new Fields(""));
+                .shuffleGrouping(Constants.twitterStreamSpoutId);
+
+        // Get panic words, parse and store in list.
+        new GetPanicWords();
 
         Config conf = new Config();
         conf.setDebug(false);
@@ -28,9 +31,4 @@ public class FearmongeringDetectionSystem
         Thread.sleep(10000);
         cluster.shutdown();
     }
-
-    /*public void getPanicWords()
-    {
-        String s = readUrl("http://api.datamuse.com/words?rd=*");
-    }*/
 }

@@ -6,6 +6,7 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 import twitter4j.Status;
+import utils.GetPanicWords;
 
 import java.util.Map;
 
@@ -29,8 +30,11 @@ public class FilterPanicTweetsBolt extends BaseRichBolt
 
         for (String word : words)
         {
-            // if (word is a panic word, emit the tweet)
-            collector.emit(new Values(tweet));
+            if (GetPanicWords.PANIC_WORDS_LIST.contains(word))
+            {
+                System.out.println("\n# Panic tweet:\n" + tweet.getText());
+                collector.emit(new Values(tweet));
+            }
         }
     }
 
